@@ -45,6 +45,7 @@ export const authOptions: NextAuthOptions = {
     session: ({ session, token, user }) => {
       // console.log("Session Callback", { session, token });
       if (session?.user) {
+        // @ts-ignore
         session.user = token.user;
       }
       return session;

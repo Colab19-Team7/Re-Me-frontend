@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import LibraryItem from "~components/libraryItem";
 import { authOptions } from "~lib/auth";
+import { Item } from "~types/item";
 
 async function getData() {
   const session = await getServerSession(authOptions);
@@ -15,6 +16,8 @@ async function getData() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      // @ts-ignore
+      // TODO: add type for session
       Authorization: session?.user?.token,
     },
   });
@@ -63,7 +66,7 @@ export default async function IndexPage() {
             </div>
 
             <div className="grid gap-x-4 gap-y-8 px-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3">
-              {data.map((item) => (
+              {data.map((item: Item) => (
                 <LibraryItem item={item} key={item.id} />
               ))}
             </div>

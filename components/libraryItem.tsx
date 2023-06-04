@@ -1,6 +1,7 @@
 import { Check, X } from "lucide-react";
+import { Item } from "~types/item";
 
-function LibraryItem({ item }) {
+function LibraryItem({ item }: { item: Item }) {
   return (
     <div className="overflow-hidden rounded-3xl border-4 border-[#93A3B6] bg-[#202124]">
       <a
@@ -8,6 +9,7 @@ function LibraryItem({ item }) {
         className="group relative mb-2 block h-64 overflow-hidden bg-gray-100 lg:mb-3"
       >
         {/* TODO: create an imageProxy API use Image component */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.item_image}
           loading="lazy"

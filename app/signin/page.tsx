@@ -65,8 +65,6 @@ function SignIn() {
         redirect: false,
       });
 
-      console.log(res);
-
       if (res?.error) {
         if (res?.error === "CredentialsSignin") {
           setError("Invalid email or password.");

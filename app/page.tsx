@@ -3,12 +3,40 @@ import { getServerSession } from "next-auth";
 import LibraryItem from "~components/libraryItem";
 import { authOptions } from "~lib/auth";
 
-export default async function IndexPage() {
+async function getData() {
   const session = await getServerSession(authOptions);
 
-  if (!session) {
-    redirect("/api/auth/signin");
+  if (!session?.user) redirect("/signin");
+
+  const res = await fetch("https://re-me-api.onrender.com/api/v1/items", {
+    next: {
+      revalidate: 60,
+    },
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: session?.user?.token,
+    },
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+    // console.log(res.json());
   }
+
+  // console.log(res.json());
+
+  return res.json();
+}
+
+export default async function IndexPage() {
+  const data = await getData();
+
+  // console.log(data);
   return (
     <section className="grid min-h-screen grid-cols-12 gap-6 bg-[#130F40] px-6 py-8 text-[#FEF8FD]">
       <div className="col-span-2 h-fit items-start space-y-5 rounded-3xl bg-[#1E1633] px-3 py-4">
@@ -35,8 +63,8 @@ export default async function IndexPage() {
             </div>
 
             <div className="grid gap-x-4 gap-y-8 px-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <LibraryItem key={i} />
+              {data.map((item) => (
+                <LibraryItem item={item} key={item.id} />
               ))}
             </div>
           </div>

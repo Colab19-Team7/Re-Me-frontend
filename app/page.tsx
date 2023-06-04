@@ -1,7 +1,14 @@
-import LibraryItem from "~components/libraryItem"
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import LibraryItem from "~components/libraryItem";
+import { authOptions } from "~lib/auth";
 
-export default function IndexPage() {
-  // redirect("/sign-in")
+export default async function IndexPage() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
   return (
     <section className="grid min-h-screen grid-cols-12 gap-6 bg-[#130F40] px-6 py-8 text-[#FEF8FD]">
       <div className="col-span-2 h-fit items-start space-y-5 rounded-3xl bg-[#1E1633] px-3 py-4">
@@ -36,5 +43,5 @@ export default function IndexPage() {
         </div>
       </div>
     </section>
-  )
+  );
 }

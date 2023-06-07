@@ -66,11 +66,13 @@ function SignIn() {
       });
 
       if (res?.error) {
-        if (res?.error === "CredentialsSignin") {
+        if (res.error === "CredentialsSignin") {
           setError("Invalid email or password.");
         } else {
           setError("Unable to sign in.");
         }
+
+        return;
       }
       router.push("/");
     } catch (error) {
@@ -82,13 +84,6 @@ function SignIn() {
   }
 
   return (
-    // <Form {...form}>
-    //   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-
-    //     <FormMessage>{error}</FormMessage>
-    //     <Button type="submit">{loading ? "Loading..." : "Sign In"}</Button>
-    //   </form>
-    // </Form>
     <div className="grid min-h-screen grid-cols-12 bg-gradient-to-b from-[#0D0B25] from-20% via-[#261C92] via-100% to-[#93A3B6] to-100%">
       <div className="col-span-3 flex flex-col items-center justify-center gap-4 bg-[url('/auth-bg.jpg')] bg-cover text-[#FFE169]">
         <h1 className="text-5xl font-semibold">Welcome to</h1>

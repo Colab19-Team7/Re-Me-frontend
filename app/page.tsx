@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import LibraryItem from "~components/libraryItem";
@@ -11,7 +12,7 @@ async function getData() {
 
   const res = await fetch("https://re-me-api.onrender.com/api/v1/items", {
     next: {
-      revalidate: 60,
+      revalidate: 0,
     },
     method: "GET",
     headers: {
@@ -21,17 +22,12 @@ async function getData() {
       Authorization: session?.user?.token,
     },
   });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
 
   // Recommendation: handle errors
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
-    // console.log(res.json());
   }
-
-  // console.log(res.json());
 
   return res.json();
 }
@@ -39,20 +35,23 @@ async function getData() {
 export default async function IndexPage() {
   const data = await getData();
 
-  // console.log(data);
   return (
-    <section className="grid min-h-screen grid-cols-12 gap-6 bg-[#130F40] px-6 py-8 text-[#FEF8FD]">
-      <div className="col-span-2 h-fit items-start space-y-5 rounded-3xl bg-[#1E1633] px-3 py-4">
+    <section className="relative grid min-h-screen grid-cols-12 gap-6 bg-[#130F40] px-6 py-8 text-[#FEF8FD]">
+      <div className="sticky col-span-2 h-fit items-start space-y-5 rounded-3xl bg-[#1E1633] px-3 py-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#FFEC78] lg:text-3xl">
+          <h1 className="font-mono text-2xl font-bold text-[#FFEC78] lg:text-3xl">
             Re-Me
           </h1>
           <p className="text-sm text-[#93A3B6]">a bookmarking reminder app</p>
         </div>
 
         <ul className="text-[#FEF8FD]">
-          <li className="cursor-pointer">Library</li>
-          <li className="cursor-pointer">Account</li>
+          <li className="cursor-pointer">
+            <Link href="/">Library</Link>
+          </li>
+          <li className="cursor-pointer">
+            <Link href="/account">Account</Link>
+          </li>
         </ul>
       </div>
 

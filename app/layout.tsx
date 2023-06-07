@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 import { TailwindIndicator } from "~components/tailwind-indicator";
-import { ThemeProvider } from "~components/theme-provider";
 import { siteConfig } from "~config/site";
-import { fontSans } from "~lib/fonts";
+import { fontMono, fontSans } from "~lib/fonts";
 import { cn } from "~lib/utils";
 
 import "~styles/globals.css";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -36,16 +36,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
+            fontSans.variable,
+            fontMono.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Providers>
             <div className="relative flex min-h-screen flex-col">
-              {/* <SiteHeader /> */}
               <div className="flex-1">{children}</div>
             </div>
             <TailwindIndicator />
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </>

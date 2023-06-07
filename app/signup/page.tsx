@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Metadata } from "next";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -19,6 +20,11 @@ import {
 } from "~components/ui/form";
 import { Input } from "~components/ui/input";
 import { cn } from "~lib/utils";
+
+export const metadata: Metadata = {
+  title: "Sign Up",
+  description: "Sign up for an account and start using Re-Me",
+};
 
 const formSchema = z
   .object({
@@ -104,113 +110,132 @@ export default function RegisterForm() {
         <Icons.logo className="h-64 w-52" />
         <h1 className="text-8xl uppercase">re-me</h1>
       </div>
-      <div className="col-span-9 grid place-content-center gap-8">
-        <h1 className="text-2xl font-semibold text-[#FFE169]">SIGN UP</h1>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-96 space-y-1"
-          >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="NAME"
-                      className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="EMAIL"
-                      className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="PASSWORD"
-                      className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="REPEAT PASSWORD"
-                      className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+      <div className="col-span-9 grid place-content-center">
+        <div className="flex w-[335px] flex-col gap-6">
+          <h1 className="text-2xl font-semibold text-[#FFE169]">SIGN UP</h1>
 
-            {error.length > 0 && (
-              <div className="text-red-500">
-                {error.map((e) => (
-                  <p key={e}>{e}</p>
-                ))}
-              </div>
-            )}
-            <div className="w-[335px] pt-6">
-              <Button
-                disabled={loading}
-                className={cn(
-                  "h-[58px] w-full rounded-full bg-[#FFE169] text-xl font-semibold text-[#130F40]",
-                  // loading && "cursor-not-allowed opacity-50",
-                  "hover:bg-[#FFE169] hover:opacity-80"
+          <div>
+            <Button
+              type="button"
+              className="relative flex h-[60px] w-full bg-[#FEF8FD] font-bold uppercase text-[#130F40] hover:bg-[#FEF8FD] hover:opacity-80"
+            >
+              <Icons.google className="absolute left-5 h-6 w-6" />
+              Sign in with Google
+            </Button>
+          </div>
+
+          <div className="flex items-center">
+            <span className="h-[0.8px] flex-1 bg-[#E4E5E7]" />
+            <span className="px-4 text-sm text-white">OR</span>
+            <span className="h-[0.8px] flex-1 bg-[#E4E5E7]" />
+          </div>
+
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-96 space-y-1"
+            >
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="NAME"
+                        className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
                 )}
-                type="submit"
-              >
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                SIGN UP
-              </Button>
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="EMAIL"
+                        className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="PASSWORD"
+                        className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="REPEAT PASSWORD"
+                        className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-              <Button
-                variant="link"
-                className="w-full text-center text-lg text-[#93A3B6]"
-                asChild
-              >
-                <Link href="/signin">Click here to Sign In</Link>
-              </Button>
-            </div>
-          </form>
-        </Form>
+              {error.length > 0 && (
+                <div className="text-red-500">
+                  {error.map((e) => (
+                    <p key={e}>{e}</p>
+                  ))}
+                </div>
+              )}
+              <div className="w-[335px] pt-6">
+                <Button
+                  disabled={loading}
+                  className={cn(
+                    "h-[58px] w-full rounded-full bg-[#FFE169] text-xl font-semibold text-[#130F40]",
+                    // loading && "cursor-not-allowed opacity-50",
+                    "hover:bg-[#FFE169] hover:opacity-80"
+                  )}
+                  type="submit"
+                >
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  SIGN UP
+                </Button>
+
+                <Button
+                  variant="link"
+                  className="w-full text-center text-lg text-[#93A3B6]"
+                  asChild
+                >
+                  <Link href="/signin">Click here to Sign In</Link>
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
       </div>
     </div>
   );

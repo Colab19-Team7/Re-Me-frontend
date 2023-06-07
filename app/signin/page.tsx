@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Metadata } from "next";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,6 +20,11 @@ import {
 } from "~components/ui/form";
 import { Input } from "~components/ui/input";
 import { cn } from "~lib/utils";
+
+export const metadata: Metadata = {
+  title: "Sign In",
+  description: "Sign in to your account and start using Re-Me",
+};
 
 const formSchema = z.object({
   email: z
@@ -90,79 +96,98 @@ function SignIn() {
         <Icons.logo className="h-64 w-52" />
         <h1 className="text-8xl uppercase">re-me</h1>
       </div>
-      <div className="col-span-9 grid place-content-center gap-8">
-        <h1 className="text-2xl font-semibold text-[#FFE169]">SIGN IN</h1>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-96 space-y-1"
-          >
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="EMAIL"
-                      className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="PASSWORD"
-                      className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* {error.length > 0 && (
+      <div className="col-span-9 grid place-content-center">
+        <div className="flex w-[335px] flex-col gap-6">
+          <h1 className="text-2xl font-semibold text-[#FFE169]">SIGN IN</h1>
+
+          <div>
+            <Button
+              type="button"
+              className="relative flex h-[60px] w-full bg-[#FEF8FD] font-bold uppercase text-[#130F40] hover:bg-[#FEF8FD] hover:opacity-80"
+            >
+              <Icons.google className="absolute left-5 h-6 w-6" />
+              Sign in with Google
+            </Button>
+          </div>
+
+          <div className="flex items-center">
+            <span className="h-[0.8px] flex-1 bg-[#E4E5E7]" />
+            <span className="px-4 text-sm text-white">OR</span>
+            <span className="h-[0.8px] flex-1 bg-[#E4E5E7]" />
+          </div>
+
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-96 space-y-1"
+            >
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder="EMAIL"
+                        className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="PASSWORD"
+                        className="h-[58px] w-[335px] rounded-[8px] border-[#FEF8FD] bg-[#130F40] pl-10 text-[#FEF8FD] placeholder:text-[#FEF8FD]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* {error.length > 0 && (
               <div className="text-red-500">
                 {error.map((e) => (
                   <p key={e}>{e}</p>
                 ))}
               </div>
             )} */}
-            <FormMessage>{error}</FormMessage>
-            <div className="w-[335px] pt-6">
-              <Button
-                disabled={loading}
-                className={cn(
-                  "h-[58px] w-full rounded-full bg-[#FFE169] text-xl font-semibold text-[#130F40]",
-                  // loading && "cursor-not-allowed opacity-50",
-                  "hover:bg-[#FFE169] hover:opacity-80"
-                )}
-                type="submit"
-              >
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                SIGN IN
-              </Button>
+              <FormMessage>{error}</FormMessage>
+              <div className="w-[335px] pt-6">
+                <Button
+                  disabled={loading}
+                  className={cn(
+                    "h-[58px] w-full rounded-full bg-[#FFE169] text-xl font-semibold text-[#130F40]",
+                    // loading && "cursor-not-allowed opacity-50",
+                    "hover:bg-[#FFE169] hover:opacity-80"
+                  )}
+                  type="submit"
+                >
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  SIGN IN
+                </Button>
 
-              <Button
-                type="button"
-                asChild
-                variant="link"
-                className="w-full text-center text-lg text-[#93A3B6]"
-              >
-                <Link href="/signup">Click here to Sign Up</Link>
-              </Button>
-            </div>
-          </form>
-        </Form>
+                <Button
+                  type="button"
+                  asChild
+                  variant="link"
+                  className="w-full text-center text-lg text-[#93A3B6]"
+                >
+                  <Link href="/signup">Click here to Sign Up</Link>
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
       </div>
     </div>
   );

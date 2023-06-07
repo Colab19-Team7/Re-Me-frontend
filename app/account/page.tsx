@@ -1,9 +1,15 @@
 "use client";
 
+import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { Button } from "~components/ui/button";
+
+export const metadata: Metadata = {
+  title: "Account",
+  description: "Manage your account settings",
+};
 
 export default function Account() {
   const { data, status } = useSession({
@@ -65,9 +71,11 @@ export default function Account() {
 
               <div>
                 <p className="text-lg font-semibold uppercase">
+                  {/* @ts-ignore */}
                   {data?.session.user.fullname}
                 </p>
                 <p className="text-sm uppercase text-[#93A3B6]">
+                  {/* @ts-ignore */}
                   {data?.session.user.email}
                 </p>
               </div>
@@ -77,7 +85,7 @@ export default function Account() {
           </div>
 
           <Button
-            className="mx-auto block min-w-[185px] rounded-sm bg-white text-lg font-bold uppercase text-black"
+            className="mx-auto block min-w-[185px] rounded-sm bg-white text-lg font-bold uppercase text-black hover:bg-white hover:text-black hover:opacity-80"
             onClick={() =>
               signOut({
                 callbackUrl: "/signin",

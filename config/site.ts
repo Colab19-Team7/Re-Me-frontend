@@ -1,4 +1,4 @@
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Re-Me",
@@ -10,8 +10,8 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    twitter: "https://twitter.com/Colab19_Team7",
+    github: "https://github.com/Colab19-Team7/re-me-frontend",
   },
-}
+  url: "https://re-me.onrender.com",
+};

@@ -4,10 +4,7 @@ import { Item } from "~types/item";
 function LibraryItem({ item }: { item: Item }) {
   return (
     <div className="overflow-hidden rounded-3xl border-4 border-[#93A3B6] bg-[#202124]">
-      <a
-        href="#"
-        className="group relative mb-2 block h-64 overflow-hidden bg-gray-100 lg:mb-3"
-      >
+      <div className="group relative mb-2 block h-64 overflow-hidden bg-gray-100 lg:mb-3">
         {/* TODO: create an imageProxy API use Image component */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -18,16 +15,18 @@ function LibraryItem({ item }: { item: Item }) {
           alt={item.title}
           className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
         />
-      </a>
+      </div>
 
       <div className="space-y-4">
         <div className="px-3 text-center">
-          <h2 className="hover:gray-800 mb-1 line-clamp-2 font-bold uppercase text-[#FEF8FD] transition duration-100 lg:text-lg">
+          <h2 className="hover:gray-800 mb-1 line-clamp-1 font-bold uppercase text-[#FEF8FD] transition duration-100 lg:text-lg">
             {item.title}
           </h2>
           <a
             className="line-clamp-1 cursor-pointer text-[#93A3B6] underline lg:text-lg"
             href={item.item_link}
+            target="_blank"
+            rel="noreferrer"
           >
             {item.item_link}
           </a>

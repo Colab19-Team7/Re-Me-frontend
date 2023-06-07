@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { Button } from "~components/ui/button";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Account",
   description: "Manage your account settings",
 };

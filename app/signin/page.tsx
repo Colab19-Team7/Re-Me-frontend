@@ -21,7 +21,7 @@ import {
 import { Input } from "~components/ui/input";
 import { cn } from "~lib/utils";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Sign In",
   description: "Sign in to your account and start using Re-Me",
 };

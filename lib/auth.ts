@@ -1,5 +1,6 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -9,12 +10,8 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Sign in",
       credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "example@example.com",
-        },
-        password: { label: "Password", type: "password" },
+        email: {},
+        password: {},
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -40,20 +37,46 @@ export const authOptions: NextAuthOptions = {
         return null;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
   ],
   callbacks: {
+    async signIn({ account, profile, user }) {
+      if (account?.provider === "google") {
+        const res = await fetch("https://re-me-api.onrender.com/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: "ejhrtjryj2@gmailos.com",
+            password: 12345678,
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+
+          user.token = data.token;
+          user.id = data.user.id;
+          user.email = data.user.email;
+          user.fullname = data.user.fullname;
+          user.created_at = data.user.created_at;
+          user.updated_at = data.user.updated_at;
+        }
+        // return "/signin";
+      }
+
+      return true;
+    },
     session: ({ session, token, user }) => {
-      // console.log("Session Callback", { session, token });
       if (session?.user) {
-        // @ts-ignore
         session.user = token.user;
       }
+
       return session;
     },
-    jwt: (res) => {
-      // console.log("JWT Callback", { token, user, account, profile });
-      const { token, user, account, profile } = res;
-      // console.log("response", res);
+    jwt: ({ token, user, account, profile }) => {
       if (user) {
         token.user = user;
       }

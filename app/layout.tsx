@@ -5,13 +5,10 @@ import { fontMono, fontSans } from "~lib/fonts";
 import { cn } from "~lib/utils";
 
 import "~styles/globals.css";
-import { Providers } from "./providers";
+import { Providers } from "../components/providers";
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
+  title: siteConfig.name,
   description: siteConfig.description,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -19,8 +16,6 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: siteConfig.name,

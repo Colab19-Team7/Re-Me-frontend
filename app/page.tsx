@@ -17,15 +17,11 @@ async function getData() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      // @ts-ignore
-      // TODO: add type for session
-      Authorization: session?.user?.token,
+      Authorization: session.user.token,
     },
   });
 
-  // Recommendation: handle errors
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
 

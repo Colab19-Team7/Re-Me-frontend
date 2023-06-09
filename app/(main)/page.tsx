@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import LibraryItem from "~components/libraryItem";
 import { authOptions } from "~lib/auth";
@@ -8,8 +7,6 @@ import { Item } from "~types/item";
 async function getData() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user) redirect("/signin");
-
   const res = await fetch("https://re-me-api.onrender.com/api/v1/items", {
     next: {
       revalidate: 0,
@@ -17,12 +14,12 @@ async function getData() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: session.user.token,
+      Authorization: session!.user.token,
     },
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch library");
   }
 
   return res.json();

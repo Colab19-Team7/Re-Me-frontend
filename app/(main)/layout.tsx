@@ -2,14 +2,14 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "~lib/auth";
 
-import LoginForm from "./login-form";
-
-async function SignIn() {
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const session = await getServerSession(authOptions);
 
-  if (session?.user) redirect("/");
+  if (!session) redirect("/signin");
 
-  return <LoginForm />;
+  return <section>{children}</section>;
 }
-
-export default SignIn;

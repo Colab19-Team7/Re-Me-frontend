@@ -6,7 +6,7 @@ import { Button } from "~components/ui/button";
 
 export default function Account({ session }: { session: Session }) {
   return (
-    <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <div className="mx-auto max-w-screen-2xl px-4 md:px-10">
       <div className="mb-6 flex items-end justify-between gap-4">
         <h2 className="text-2xl font-bold uppercase text-[#FFEC78] lg:text-3xl">
           account

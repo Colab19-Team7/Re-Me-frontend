@@ -50,8 +50,12 @@ function ConfirmDelModal({ id }: { id: string }) {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="ghost" className="p-0">
-          <X size={30} color="#FF2D2D" strokeWidth={3} />
+        <Button
+          variant="ghost"
+          className="p-0 hover:bg-transparent"
+          title="Delete"
+        >
+          <X size={28} color="#FF2D2D" strokeWidth={3} />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-w-md bg-white px-2 text-black">

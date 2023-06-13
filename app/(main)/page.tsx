@@ -34,21 +34,19 @@ export default async function IndexPage() {
   const data = await getData(session?.user.token!);
 
   return (
-    <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-      <div className="mb-6 flex items-end justify-between gap-4">
+    <div className="mx-auto max-w-screen-2xl px-4 md:px-10">
+      <div className="mb-6 flex flex-col gap-4">
         <h2 className="text-2xl font-bold uppercase text-[#FFEC78] lg:text-3xl">
           library
         </h2>
+        <div className="h-px bg-[#93A3B6]" />
       </div>
+
+      <h2 className="mb-10 mt-4 text-xl font-medium uppercase">Reminders</h2>
 
       <div className="grid gap-x-4 gap-y-8 px-6 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3">
         {data.map((item: Item) => (
-          <LibraryItem
-            // onDelete={deleteItem}
-            // onMarkAsRead={markAsRead}
-            item={item}
-            key={item.id}
-          />
+          <LibraryItem item={item} key={item.id} />
         ))}
       </div>
     </div>

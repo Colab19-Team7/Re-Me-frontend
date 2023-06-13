@@ -12,6 +12,25 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   twitter: Twitter,
+  archive: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={props.size || 16}
+      height={props.size || 16}
+      fill="none"
+      viewBox="0 0 16 16"
+      {...props}
+    >
+      <path
+        fill="#FEF8FD"
+        d="M8 9.333a1.333 1.333 0 01-.986-.444H2.223v5.333a.889.889 0 00.889.89h9.777a.889.889 0 00.89-.89V8.89H8.982A1.333 1.333 0 018 9.333zm1.778 1.334a.445.445 0 01-.444.444H6.667a.445.445 0 110-.889h2.667a.445.445 0 01.444.445zM6.666 5.333H2.444A.667.667 0 001.777 6v2h4.89V5.333zM13.555 5.333H9.333V8h4.889V6a.666.666 0 00-.667-.667z"
+      ></path>
+      <path
+        fill="#FEF8FD"
+        d="M5.778 4.244L7.556 2.49V8a.444.444 0 10.889 0V2.489l1.777 1.755a.445.445 0 10.627-.63L8 .79 5.16 3.613a.444.444 0 00.618.631z"
+      ></path>
+    </svg>
+  ),
   logo: (props: LucideProps) => (
     <svg
       width="917"

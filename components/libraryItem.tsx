@@ -72,13 +72,18 @@ function LibraryItem({ item }: LibraryItemProps) {
           <div className="flex items-center justify-center gap-5">
             <Button
               variant="ghost"
-              className="p-0"
+              className="p-0 hover:bg-transparent"
+              title="Move to Archive"
               onClick={() => markAsRead(item.id)}
             >
               <Check color="#FEF8FD" size={28} strokeWidth={2} />
             </Button>
 
-            <Button variant="ghost" className="p-0">
+            <Button
+              variant="ghost"
+              className="p-0 hover:bg-transparent"
+              title="Schedule"
+            >
               <Clock
                 color="#FEF8FD"
                 size={28}

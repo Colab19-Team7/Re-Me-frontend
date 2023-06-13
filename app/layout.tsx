@@ -9,31 +9,6 @@ import { cn } from "~lib/utils";
 import "~styles/globals.css";
 import { Providers } from "../components/providers";
 
-// const metadata: Metadata = {
-//   title: siteConfig.name,
-//   description: siteConfig.description,
-//   themeColor: [
-//     { media: "(prefers-color-scheme: light)", color: "white" },
-//     { media: "(prefers-color-scheme: dark)", color: "black" },
-//   ],
-//   icons: {
-//     icon: "/favicon.ico",
-//   },
-//   openGraph: {
-//     title: siteConfig.name,
-//     locale: "en_US",
-//     url: siteConfig.url,
-//     siteName: siteConfig.name,
-//     images: [
-//       {
-//         url: `https://re-me.onrender.com/main-logo.png`,
-//         width: 1200,
-//         height: 630,
-//         alt: siteConfig.name,
-//       },
-//     ],
-//   },
-// };
 interface RootLayoutProps {
   children: React.ReactNode;
 }
@@ -49,9 +24,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            fontMono.variable,
             fontSans.variable,
-            fontMono.variable
+            "min-h-screen bg-background antialiased"
           )}
         >
           <Providers>

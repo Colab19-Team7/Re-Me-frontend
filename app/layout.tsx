@@ -11,7 +11,7 @@ import { cn } from "~lib/utils";
 import "~styles/globals.css";
 import { Providers } from "../components/providers";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
   themeColor: [

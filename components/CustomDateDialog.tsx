@@ -53,6 +53,7 @@ export function CustomDateDialog() {
         </Button>
       </DialogTrigger>
       <DialogContent
+        // @ts-ignore
         showCloseButton={false}
         className="w-96 bg-white py-3 text-black"
       >

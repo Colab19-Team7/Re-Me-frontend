@@ -1,10 +1,21 @@
-import { Check, X } from "lucide-react";
+"use client";
+
+import { Check, Clock } from "lucide-react";
 import { Item } from "~types/item";
 
-function LibraryItem({ item }: { item: Item }) {
+import ConfirmDelModal from "./ConfirmDelModal";
+import { Button } from "./ui/button";
+
+interface LibraryItemProps {
+  item: Item;
+  onDelete: (id: string) => void;
+  onMarkAsRead: (id: string) => void;
+}
+
+function LibraryItem({ item, onDelete, onMarkAsRead }: LibraryItemProps) {
   return (
     <div className="overflow-hidden rounded-3xl border-4 border-[#93A3B6] bg-[#202124]">
-      <div className="group relative mb-2 block h-64 overflow-hidden bg-gray-100 lg:mb-3">
+      <div className="group relative mb-2 block h-52 overflow-hidden bg-gray-100 lg:mb-3">
         {/* TODO: create an imageProxy API use Image component */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -17,7 +28,7 @@ function LibraryItem({ item }: { item: Item }) {
         />
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         <div className="px-3 text-center">
           <h2 className="hover:gray-800 mb-1 line-clamp-1 font-bold uppercase text-[#FEF8FD] transition duration-100 lg:text-lg">
             {item.title}
@@ -35,18 +46,22 @@ function LibraryItem({ item }: { item: Item }) {
         <div className="border-2 border-[#2A2A2A]" />
 
         <div className="flex justify-between gap-2 px-3 pb-3">
-          <Check
-            color="#FFEC78"
-            size={40}
-            strokeWidth={3}
-            className="cursor-pointer"
-          />
-          <X
-            size={40}
-            color="#B90E0E"
-            strokeWidth={3}
-            className="cursor-pointer"
-          />
+          <div className="flex items-center justify-center gap-5">
+            <Button variant="ghost" className="p-0">
+              <Check color="#FEF8FD" size={32} strokeWidth={2} />
+            </Button>
+
+            <Button variant="ghost" className="p-0">
+              <Clock
+                color="#FEF8FD"
+                size={32}
+                strokeWidth={2}
+                className="p-0"
+              />
+            </Button>
+          </div>
+
+          <ConfirmDelModal id={item.id} />
         </div>
       </div>
     </div>

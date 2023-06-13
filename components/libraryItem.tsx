@@ -1,6 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Check, Clock } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { Item } from "~types/item";
 
 import ConfirmDelModal from "./ConfirmDelModal";
@@ -11,6 +13,29 @@ interface LibraryItemProps {
 }
 
 function LibraryItem({ item }: LibraryItemProps) {
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  const markAsRead = async (id: string) => {
+    try {
+      const res = await fetch(
+        `https://re-me-api.onrender.com/api/v1/archived`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: session!.user.token,
+          },
+          body: JSON.stringify({ id }),
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      throw new Error("Failed to mark item as read");
+    } finally {
+      router.refresh();
+    }
+  };
   return (
     <div className="overflow-hidden rounded-3xl border-4 border-[#93A3B6] bg-[#202124]">
       <div className="group relative mb-2 block h-52 overflow-hidden bg-gray-100 lg:mb-3">
@@ -45,14 +70,18 @@ function LibraryItem({ item }: LibraryItemProps) {
 
         <div className="flex justify-between gap-2 px-3 pb-3">
           <div className="flex items-center justify-center gap-5">
-            <Button variant="ghost" className="p-0">
-              <Check color="#FEF8FD" size={32} strokeWidth={2} />
+            <Button
+              variant="ghost"
+              className="p-0"
+              onClick={() => markAsRead(item.id)}
+            >
+              <Check color="#FEF8FD" size={28} strokeWidth={2} />
             </Button>
 
             <Button variant="ghost" className="p-0">
               <Clock
                 color="#FEF8FD"
-                size={32}
+                size={28}
                 strokeWidth={2}
                 className="p-0"
               />

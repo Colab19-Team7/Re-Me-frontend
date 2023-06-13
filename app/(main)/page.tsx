@@ -1,5 +1,7 @@
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import LibraryItem from "~components/libraryItem";
+import { siteConfig } from "~config/site";
 import { authOptions } from "~lib/auth";
 import { Item } from "~types/item";
 
@@ -22,8 +24,12 @@ async function getData(token: string) {
   return res.json();
 }
 
+export const metadata: Metadata = {
+  title: siteConfig.name,
+  description: siteConfig.description,
+};
+
 export default async function IndexPage() {
-  // const router = useRouter();
   const session = await getServerSession(authOptions);
   const data = await getData(session?.user.token!);
 

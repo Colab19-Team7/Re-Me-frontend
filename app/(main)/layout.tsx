@@ -12,10 +12,10 @@ const navItems = [
     name: "Archive",
     href: "/archive",
   },
-  {
-    name: "Trash",
-    href: "/trash",
-  },
+  // {
+  //   name: "Trash",
+  //   href: "/trash",
+  // },
   {
     name: "Account",
     href: "/account",

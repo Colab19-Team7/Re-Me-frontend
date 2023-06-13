@@ -51,7 +51,7 @@ function ConfirmDelModal({ id }: { id: string }) {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button variant="ghost" className="p-0">
-          <X size={40} color="#FF2D2D" strokeWidth={3} />
+          <X size={30} color="#FF2D2D" strokeWidth={3} />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-w-md bg-white px-2 text-black">

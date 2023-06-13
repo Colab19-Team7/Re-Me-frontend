@@ -1,7 +1,11 @@
+"use client";
+
+import { useEffect } from "react";
 import { Metadata } from "next";
 import { TailwindIndicator } from "~components/tailwind-indicator";
 import { siteConfig } from "~config/site";
 import { fontMono, fontSans } from "~lib/fonts";
+import { regSW } from "~lib/regSw";
 import { cn } from "~lib/utils";
 
 import "~styles/globals.css";
@@ -24,7 +28,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: `/main-logo.png`,
+        url: `https://re-me.onrender.com/main-logo.png`,
         width: 1200,
         height: 630,
         alt: siteConfig.name,
@@ -32,12 +36,15 @@ export const metadata: Metadata = {
     ],
   },
 };
-
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  useEffect(() => {
+    regSW();
+  }, []);
+
   return (
     <>
       <html lang="en" suppressHydrationWarning>

@@ -1,14 +1,8 @@
 "use client";
 
-import { Metadata } from "next";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "~components/ui/button";
-
-const metadata: Metadata = {
-  title: "Account",
-  description: "Manage your account settings",
-};
 
 export default function Account({ session }: { session: Session }) {
   return (

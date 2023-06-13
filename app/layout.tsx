@@ -26,7 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           className={cn(
             fontMono.variable,
             fontSans.variable,
-            "min-h-screen bg-background antialiased"
+            "min-h-screen bg-background font-sans antialiased"
           )}
         >
           <Providers>

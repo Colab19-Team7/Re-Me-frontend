@@ -1,11 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Check, Clock } from "lucide-react";
+import { Check } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { Item } from "~types/item";
 
 import ConfirmDelModal from "./ConfirmDelModal";
+import SchedulePopover from "./SchedulePopover";
 import { Button } from "./ui/button";
 
 interface LibraryItemProps {
@@ -79,18 +80,7 @@ function LibraryItem({ item }: LibraryItemProps) {
               <Check color="#FEF8FD" size={28} strokeWidth={2} />
             </Button>
 
-            <Button
-              variant="ghost"
-              className="p-0 hover:bg-transparent"
-              title="Schedule"
-            >
-              <Clock
-                color="#FEF8FD"
-                size={28}
-                strokeWidth={2}
-                className="p-0"
-              />
-            </Button>
+            <SchedulePopover />
           </div>
 
           <ConfirmDelModal id={item.id} />

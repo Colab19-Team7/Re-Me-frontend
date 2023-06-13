@@ -8,11 +8,9 @@ import { Button } from "./ui/button";
 
 interface LibraryItemProps {
   item: Item;
-  onDelete: (id: string) => void;
-  onMarkAsRead: (id: string) => void;
 }
 
-function LibraryItem({ item, onDelete, onMarkAsRead }: LibraryItemProps) {
+function LibraryItem({ item }: LibraryItemProps) {
   return (
     <div className="overflow-hidden rounded-3xl border-4 border-[#93A3B6] bg-[#202124]">
       <div className="group relative mb-2 block h-52 overflow-hidden bg-gray-100 lg:mb-3">

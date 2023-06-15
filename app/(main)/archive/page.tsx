@@ -1,7 +1,13 @@
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import ArchiveItem from "~components/archiveItem";
 import { authOptions } from "~lib/auth";
 import { Item } from "~types/item";
+
+export const metadata: Metadata = {
+  title: "Archive",
+  description: "See your completed reminder",
+};
 
 async function getArchive() {
   const session = await getServerSession(authOptions);

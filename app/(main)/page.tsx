@@ -6,22 +6,25 @@ import { authOptions } from "~lib/auth";
 import { Item } from "~types/item";
 
 async function getData(token: string) {
-  const res = await fetch("https://re-me-api.onrender.com/api/v1/items", {
-    next: {
-      revalidate: 0,
-    },
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  });
+  try {
+    const res = await fetch("https://re-me-api.onrender.com/api/v1/items", {
+      next: {
+        revalidate: 0,
+      },
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
 
-  if (!res.ok) {
+    // console.log(res);
+
+    return res.json();
+  } catch (error) {
+    console.log(error);
     throw new Error("Failed to fetch library");
   }
-
-  return res.json();
 }
 
 export const metadata: Metadata = {

@@ -39,7 +39,7 @@ function LibraryItem({ item }: LibraryItemProps) {
   };
   return (
     <div className="overflow-hidden rounded-3xl border-4 border-[#93A3B6] bg-[#202124]">
-      <div className="group relative mb-2 block h-52 overflow-hidden bg-gray-100 lg:mb-3">
+      <div className="group relative mb-2 block h-48 overflow-hidden bg-gray-100 lg:mb-3">
         {/* TODO: create an imageProxy API use Image component */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -52,9 +52,12 @@ function LibraryItem({ item }: LibraryItemProps) {
         />
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-1">
         <div className="px-3 text-center">
-          <h2 className="hover:gray-800 mb-1 line-clamp-1 font-bold uppercase text-[#FEF8FD] transition duration-100 lg:text-lg">
+          <h2
+            title={item.title}
+            className="hover:gray-800 mb-1 line-clamp-1 font-bold uppercase text-[#FEF8FD] transition duration-100 lg:text-lg"
+          >
             {item.title}
           </h2>
           <a
@@ -62,6 +65,7 @@ function LibraryItem({ item }: LibraryItemProps) {
             href={item.item_link}
             target="_blank"
             rel="noreferrer"
+            title={item.item_link}
           >
             {item.item_link}
           </a>
@@ -69,7 +73,7 @@ function LibraryItem({ item }: LibraryItemProps) {
 
         <div className="border-2 border-[#2A2A2A]" />
 
-        <div className="flex justify-between gap-2 px-3 pb-3">
+        <div className="flex justify-between gap-2 px-3 pb-2">
           <div className="flex items-center justify-center gap-5">
             <Button
               variant="ghost"

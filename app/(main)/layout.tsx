@@ -43,11 +43,13 @@ export default async function Layout({
 
         <ul className="text-[#FEF8FD]">
           {navItems.map((item) => (
-            <li
-              key={item.name}
-              className="w-fit cursor-pointer text-lg hover:underline"
-            >
-              <Link href={item.href}>{item.name}</Link>
+            <li key={item.name} className="w-fit">
+              <Link
+                className="cursor-pointer text-lg hover:underline"
+                href={item.href}
+              >
+                {item.name}
+              </Link>
             </li>
           ))}
         </ul>

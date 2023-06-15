@@ -32,7 +32,10 @@ function ArchiveItem({ item }: ArchiveItemProps) {
       </div>
       <div className="flex w-8/12 flex-col gap-2">
         <div className="px-3 text-center">
-          <h2 className="hover:gray-800 mb-1 line-clamp-1 font-bold uppercase text-[#FEF8FD] transition duration-100 lg:text-lg">
+          <h2
+            title={item.title}
+            className="hover:gray-800 mb-1 line-clamp-1 font-bold uppercase text-[#FEF8FD] transition duration-100 lg:text-lg"
+          >
             {item.title}
           </h2>
           <a
@@ -40,6 +43,7 @@ function ArchiveItem({ item }: ArchiveItemProps) {
             href={item.item_link}
             target="_blank"
             rel="noreferrer"
+            title={item.item_link}
           >
             {item.item_link}
           </a>

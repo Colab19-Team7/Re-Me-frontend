@@ -25,7 +25,10 @@ const navItems = [
 ];
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
   description: siteConfig.description,
   openGraph: {
     type: "website",

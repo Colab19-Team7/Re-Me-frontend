@@ -6,13 +6,17 @@ import { siteConfig } from "~config/site";
 import { authOptions } from "~lib/auth";
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
   description: siteConfig.description,
   openGraph: {
     type: "website",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
         url: `${siteConfig.url}/main-logo.png`,

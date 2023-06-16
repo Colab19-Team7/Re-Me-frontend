@@ -13,5 +13,8 @@ export const siteConfig = {
     twitter: "https://twitter.com/Colab19_Team7",
     github: "https://github.com/Colab19-Team7/re-me-frontend",
   },
-  url: "https://re-me.onrender.com",
+  url:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://re-me.onrender.com",
 };

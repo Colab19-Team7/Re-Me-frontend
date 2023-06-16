@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Metadata } from "next";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -19,6 +20,11 @@ import {
 } from "~components/ui/form";
 import { Input } from "~components/ui/input";
 import { cn } from "~lib/utils";
+
+export const metadata: Metadata = {
+  title: "Sign Up",
+  description: "Create a new account",
+};
 
 const formSchema = z
   .object({
@@ -65,6 +71,23 @@ export default function RegisterForm() {
     },
   });
 
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    setError([]);
+
+    try {
+      await signIn("google", {
+        callbackUrl: "/",
+        redirect: false,
+      });
+    } catch (error) {
+      console.error(error);
+      setError(["An error occurred while trying to sign in"]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
     setError([]);
@@ -104,6 +127,7 @@ export default function RegisterForm() {
       <div>
         <Button
           type="button"
+          onClick={signInWithGoogle}
           className="relative flex h-[60px] w-full bg-[#FEF8FD] font-bold uppercase text-[#130F40] hover:bg-[#FEF8FD] hover:opacity-80"
         >
           <Icons.google className="absolute left-5 h-6 w-6" />

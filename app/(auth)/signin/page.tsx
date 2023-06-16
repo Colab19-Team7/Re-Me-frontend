@@ -21,7 +21,7 @@ import {
 import { Input } from "~components/ui/input";
 import { cn } from "~lib/utils";
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "Sign In",
   description: "Sign in to your account and start using Re-Me",
 };
@@ -91,6 +91,8 @@ function LoginForm() {
 
   const signInWithGoogle = async () => {
     setLoading(true);
+    setError("");
+
     try {
       const res = await signIn("google", {
         callbackUrl: "/",

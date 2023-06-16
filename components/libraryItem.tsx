@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { Item } from "~types/item";
 
@@ -15,9 +16,11 @@ interface LibraryItemProps {
 
 function LibraryItem({ item }: LibraryItemProps) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
 
   const markAsRead = async (id: string) => {
+    setLoading(true);
     try {
       const res = await fetch(
         `https://re-me-api.onrender.com/api/v1/archived`,
@@ -35,6 +38,7 @@ function LibraryItem({ item }: LibraryItemProps) {
       throw new Error("Failed to mark item as read");
     } finally {
       router.refresh();
+      setLoading(false);
     }
   };
   return (
@@ -81,7 +85,11 @@ function LibraryItem({ item }: LibraryItemProps) {
               title="Move to Archive"
               onClick={() => markAsRead(item.id)}
             >
-              <Check color="#FEF8FD" size={28} strokeWidth={2} />
+              {loading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Check color="#FEF8FD" size={28} strokeWidth={2} />
+              )}
             </Button>
 
             <SchedulePopover />

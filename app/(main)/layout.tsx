@@ -1,6 +1,8 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
+import { siteConfig } from "~config/site";
 import { authOptions } from "~lib/auth";
 
 const navItems = [
@@ -21,6 +23,25 @@ const navItems = [
     href: "/account",
   },
 ];
+
+export const metadata: Metadata = {
+  title: siteConfig.name,
+  description: siteConfig.description,
+  openGraph: {
+    type: "website",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [
+      {
+        url: `${siteConfig.url}/main-logo.png`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+};
 
 export default async function Layout({
   children,

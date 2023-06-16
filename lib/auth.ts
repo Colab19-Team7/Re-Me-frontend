@@ -28,7 +28,6 @@ export const authOptions: NextAuthOptions = {
 
         if (res.ok) {
           const data = await res.json();
-          // console.log(data.user);
           return {
             ...data.user,
             token: data.token,
@@ -40,22 +39,26 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
   ],
   callbacks: {
     async signIn({ account, profile, user }) {
       if (account?.provider === "google") {
-        const res = await fetch("https://re-me-api.onrender.com/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: "ejhrtjryj2@gmailos.com",
-            password: 12345678,
-          }),
-        });
-
-        if (res.ok) {
-          const data = await res.json();
+        try {
+          const data = await (
+            await fetch("https://re-me-api.onrender.com/auth/google_oauth", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ token: account.id_token }),
+            })
+          ).json();
 
           user.token = data.token;
           user.id = data.user.id;
@@ -63,8 +66,11 @@ export const authOptions: NextAuthOptions = {
           user.fullname = data.user.fullname;
           user.created_at = data.user.created_at;
           user.updated_at = data.user.updated_at;
+        } catch (error) {
+          console.log(error);
+          throw new Error("Error");
+          // return "/signin";
         }
-        // return "/signin";
       }
 
       return true;

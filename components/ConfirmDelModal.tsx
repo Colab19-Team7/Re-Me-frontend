@@ -16,28 +16,37 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { useToast } from "./ui/use-toast";
 
 function ConfirmDelModal({ id }: { id: string }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+  const { toast } = useToast();
 
-  const deleteItem = async (id: string) => {
+  const deleteItem = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        `https://re-me-api.onrender.com/api/v1/items/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: session!.user.token,
-          },
-        }
-      );
+      await fetch(`https://re-me-api.onrender.com/api/v1/items/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: session!.user.token,
+        },
+      });
+
+      toast({
+        title: "Item deleted",
+        description: "Item has been deleted successfully",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
       throw new Error("Failed to delete item");
     } finally {
       router.refresh();
@@ -82,7 +91,7 @@ function ConfirmDelModal({ id }: { id: string }) {
               Cancel
             </Button>
             <Button
-              onClick={() => deleteItem(id)}
+              onClick={deleteItem}
               disabled={loading}
               className={cn(
                 "border-0 bg-[#FF2D2D] px-7 font-bold uppercase text-[#FEF8FD]",

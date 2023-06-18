@@ -3,8 +3,19 @@
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "~components/ui/button";
+import { useToast } from "~components/ui/use-toast";
 
 export default function Account({ session }: { session: Session }) {
+  const { toast } = useToast();
+
+  async function handleSignOut() {
+    await signOut();
+    toast({
+      title: "Signed out",
+      description: "You have been signed out.",
+    });
+  }
+
   return (
     <div className="mx-auto max-w-screen-2xl px-4 md:px-10">
       <div className="mb-6 flex items-end justify-between gap-4">

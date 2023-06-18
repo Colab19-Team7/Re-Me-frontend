@@ -1,9 +1,6 @@
-"use client";
-
-import { useEffect } from "react";
 import { TailwindIndicator } from "~components/tailwind-indicator";
+import { Toaster } from "~components/ui/toaster";
 import { fontMono, fontSans } from "~lib/fonts";
-import { regSW } from "~lib/regSw";
 import { cn } from "~lib/utils";
 
 import "~styles/globals.css";
@@ -14,9 +11,9 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  useEffect(() => {
-    regSW();
-  }, []);
+  // useEffect(() => {
+  //   regSW();
+  // }, []);
 
   return (
     <>
@@ -29,6 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             "min-h-screen bg-background font-sans antialiased"
           )}
         >
+          <Toaster />
           <Providers>
             <div className="relative flex min-h-screen flex-col">
               <div className="flex-1">{children}</div>

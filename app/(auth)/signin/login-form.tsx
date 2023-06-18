@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "~components/ui/form";
 import { Input } from "~components/ui/input";
+import { useToast } from "~components/ui/use-toast";
 import { cn } from "~lib/utils";
 
 const formSchema = z.object({
@@ -43,6 +44,7 @@ const formSchema = z.object({
 function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { toast } = useToast();
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -74,9 +76,19 @@ function LoginForm() {
 
         return;
       }
+
+      toast({
+        title: "Success",
+        description: "You have successfully signed in.",
+      });
       router.push("/");
     } catch (error) {
       console.error(error);
+
+      toast({
+        title: "Error",
+        description: "Unable to sign in.",
+      });
       setError("Unable to sign in.");
     } finally {
       setLoading(false);

@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "~components/ui/form";
 import { Input } from "~components/ui/input";
+import { useToast } from "~components/ui/use-toast";
 import { cn } from "~lib/utils";
 
 const formSchema = z
@@ -54,6 +55,7 @@ const formSchema = z
 export default function RegisterForm() {
   let [loading, setLoading] = useState(false);
   let [error, setError] = useState<Array<string>>([]);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -99,18 +101,33 @@ export default function RegisterForm() {
         },
       });
 
-      setLoading(false);
       if (!res.ok) {
         setError((await res.json()).errors);
+        setLoading(false);
         return;
       }
 
-      signIn(undefined, { callbackUrl: "/" });
+      toast({
+        title: "Account created.",
+        description: "We've created your account for you.",
+      });
+
+      // signIn(undefined, { callbackUrl: "/" });
+      await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        callbackUrl: "/",
+        redirect: false,
+      });
     } catch (error: any) {
       setLoading(false);
+
+      toast({
+        title: "An error occurred.",
+        description: "An error occurred while trying to create your account.",
+      });
       setError(["An error occurred while trying to sign up"]);
       console.error(error);
-      alert(error.message);
     }
   };
 

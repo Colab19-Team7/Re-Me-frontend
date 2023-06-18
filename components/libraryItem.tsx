@@ -9,6 +9,7 @@ import { Item } from "~types/item";
 import ConfirmDelModal from "./ConfirmDelModal";
 import SchedulePopover from "./SchedulePopover";
 import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
 
 interface LibraryItemProps {
   item: Item;
@@ -18,6 +19,7 @@ function LibraryItem({ item }: LibraryItemProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+  const { toast } = useToast();
 
   const markAsRead = async (id: string) => {
     setLoading(true);
@@ -33,8 +35,18 @@ function LibraryItem({ item }: LibraryItemProps) {
           body: JSON.stringify({ id }),
         }
       );
+
+      toast({
+        title: "Item archived",
+        description: "Item has been archived successfully",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
       throw new Error("Failed to mark item as read");
     } finally {
       router.refresh();

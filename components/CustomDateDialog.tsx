@@ -8,6 +8,8 @@ import {
 } from "@radix-ui/react-popover";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon, Clock } from "lucide-react";
+import { cn } from "~lib/utils";
+
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
@@ -18,7 +20,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
-import { cn } from "~lib/utils";
 
 import { Calendar } from "./ui/calendar";
 import { Input } from "./ui/input";

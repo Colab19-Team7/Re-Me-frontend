@@ -1,11 +1,11 @@
-import Link from "next/link"
-import { Icons } from "~components/icons"
-import { siteConfig } from "~config/site"
-import { cn } from "~lib/utils"
-import { NavItem } from "~types/nav"
+import Link from "next/link";
+import { Icons } from "~components/icons";
+import { siteConfig } from "~config/site";
+import { cn } from "~lib/utils";
+import { NavItem } from "~types/nav";
 
 interface MainNavProps {
-  items?: NavItem[]
+  items?: NavItem[];
 }
 
 export function MainNav({ items }: MainNavProps) {
@@ -37,5 +37,5 @@ export function MainNav({ items }: MainNavProps) {
         </nav>
       ) : null}
     </div>
-  )
+  );
 }

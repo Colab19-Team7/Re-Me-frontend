@@ -1,4 +1,5 @@
-import { Bayon as FontMono, Roboto as FontSans } from "next/font/google";
+import { Roboto as FontSans } from "next/font/google";
+import localFont from "next/font/local";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -6,8 +7,12 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-export const fontMono = FontMono({
-  subsets: ["latin"],
+export const fontMono = localFont({
   variable: "--font-mono",
-  weight: ["400"],
+  src: [
+    {
+      path: "../public/fonts/Bauhaus-93-Regular.ttf",
+      weight: "400",
+    },
+  ],
 });

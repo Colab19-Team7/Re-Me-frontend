@@ -10,10 +10,14 @@ function SchedulePopover() {
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          className="p-0 hover:bg-transparent"
+          className="group p-0 hover:bg-transparent"
           title="Snooze"
         >
-          <Clock color="#FEF8FD" size={28} strokeWidth={2} className="p-0" />
+          <Clock
+            size={24}
+            strokeWidth={2}
+            className="p-0 text-[#FEF8FD] transition duration-300 ease-out group-hover:text-[#6D7885] group-active:text-[#434A52]"
+          />
           <span className="sr-only">Open popover</span>
         </Button>
       </PopoverTrigger>

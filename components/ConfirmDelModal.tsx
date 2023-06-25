@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, X } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { cn } from "~lib/utils";
 
@@ -60,10 +60,13 @@ function ConfirmDelModal({ id }: { id: string }) {
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className="p-0 hover:bg-transparent"
+          className="group p-0 hover:bg-transparent"
           title="Delete"
         >
-          <X size={28} color="#FF2D2D" strokeWidth={3} />
+          <Trash2
+            size={24}
+            className="text-[#FEF8FD] transition duration-300 ease-out group-hover:text-[#BB2020] group-active:text-[#951515]"
+          />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-md bg-white px-2 text-black">

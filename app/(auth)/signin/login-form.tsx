@@ -121,7 +121,7 @@ function LoginForm() {
           disabled={loading}
           onClick={signInWithGoogle}
           type="button"
-          className="relative flex h-[60px] w-full bg-[#FEF8FD] font-bold uppercase text-[#130F40] hover:bg-[#FEF8FD] hover:opacity-80"
+          className="relative flex h-[60px] w-full bg-[#FEF8FD] font-bold uppercase text-[#130F40] hover:bg-[#D4DAE0] active:bg-[#9B9D9F]"
         >
           <Icons.google className="absolute left-5 h-6 w-6" />
           Sign in with Google
@@ -182,8 +182,8 @@ function LoginForm() {
               disabled={loading}
               className={cn(
                 "h-[58px] w-full rounded-full bg-[#FFE169] text-xl font-semibold text-[#130F40]",
+                "hover:bg-[#C1B35C] active:bg-[#766F44]"
                 // loading && "cursor-not-allowed opacity-50",
-                "hover:bg-[#FFE169] hover:opacity-80"
               )}
               type="submit"
             >
@@ -194,8 +194,8 @@ function LoginForm() {
             <Button
               type="button"
               asChild
-              variant="link"
-              className="mx-auto block w-fit text-center text-lg text-[#93A3B6]"
+              variant="ghost"
+              className="mx-auto block w-fit text-center text-lg text-[#93A3B6] hover:bg-transparent hover:text-[#6D7885] active:bg-transparent active:text-[#434A52]"
             >
               <Link href="/signup">Click here to Sign Up</Link>
             </Button>

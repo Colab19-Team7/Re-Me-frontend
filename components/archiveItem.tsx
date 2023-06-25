@@ -27,7 +27,7 @@ function ArchiveItem({ item }: ArchiveItemProps) {
           // width={500}
           // height={500}
           alt={item.title}
-          className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
+          className="h-full w-full object-cover object-center"
         />
       </div>
       <div className="flex w-8/12 flex-col gap-2">
@@ -54,10 +54,13 @@ function ArchiveItem({ item }: ArchiveItemProps) {
         <div className="flex justify-between gap-2 px-3">
           <Button
             variant="ghost"
-            className="p-0 hover:bg-transparent"
-            title="Archive"
+            className="group p-0 hover:bg-transparent"
+            title="Restore Archive"
           >
-            <Icons.archive color="white" size={26} />
+            <Icons.archive
+              className="text-[#FEF8FD] transition duration-300 ease-out group-hover:fill-[#6D7885] group-active:fill-[#434A52]"
+              size={24}
+            />
           </Button>
 
           <ConfirmDelModal id={item.id} />

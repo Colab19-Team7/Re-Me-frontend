@@ -64,7 +64,7 @@ function LibraryItem({ item }: LibraryItemProps) {
           // width={500}
           // height={500}
           alt={item.title}
-          className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
+          className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-105"
         />
       </div>
 
@@ -93,14 +93,18 @@ function LibraryItem({ item }: LibraryItemProps) {
           <div className="flex items-center justify-center gap-5">
             <Button
               variant="ghost"
-              className="p-0 hover:bg-transparent"
+              className="group p-0 hover:bg-transparent"
               title="Move to Archive"
               onClick={() => markAsRead(item.id)}
             >
               {loading ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 size={24} className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <Check color="#FEF8FD" size={28} strokeWidth={2} />
+                <Check
+                  size={24}
+                  strokeWidth={2}
+                  className="text-[#FEF8FD] transition duration-300 ease-out group-hover:text-[#6D7885] group-active:bg-[#434A52]"
+                />
               )}
             </Button>
 

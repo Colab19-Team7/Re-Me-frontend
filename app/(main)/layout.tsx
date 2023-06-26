@@ -70,26 +70,22 @@ export default async function Layout({
           <p className="text-sm text-[#93A3B6]">a bookmarking reminder app</p>
         </div>
 
-        <ul className="flex flex-col gap-4 text-[#FEF8FD]">
+        <nav className="flex flex-col gap-4 text-[#FEF8FD]">
           {navItems.map((item) => (
-            <li
+            <Link
               key={item.name}
               className={cn(
-                "flex h-[40px] cursor-pointer items-center px-6",
+                "flex h-[40px] cursor-pointer items-center gap-5 px-6 text-lg",
                 "hover:bg-[#6D7885] active:bg-[#434A52]",
                 "transition-colors duration-300 ease-in"
               )}
+              href={item.href}
             >
-              <Link
-                className="flex w-full items-center gap-5 text-lg"
-                href={item.href}
-              >
-                <item.icon className="mr-2 inline-block h-5 w-5" />
-                {item.name}
-              </Link>
-            </li>
+              <item.icon className="mr-2 inline-block h-5 w-5" />
+              {item.name}
+            </Link>
           ))}
-        </ul>
+        </nav>
       </div>
 
       <div className="col-span-9 rounded-3xl bg-[#1E1633] py-10">

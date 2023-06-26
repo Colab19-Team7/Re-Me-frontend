@@ -139,7 +139,7 @@ export default function RegisterForm() {
         <Button
           type="button"
           onClick={signInWithGoogle}
-          className="relative flex h-[60px] w-full bg-[#FEF8FD] font-bold uppercase text-[#130F40] hover:bg-[#D4DAE0] active:bg-[#9B9D9F]"
+          className="relative flex h-[60px] w-full bg-[#FEF8FD] font-bold uppercase text-[#130F40] transition duration-300 ease-out hover:bg-[#D4DAE0] active:bg-[#9B9D9F]"
         >
           <Icons.google className="absolute left-5 h-6 w-6" />
           Sign in with Google
@@ -235,7 +235,7 @@ export default function RegisterForm() {
               disabled={loading}
               className={cn(
                 "h-[58px] w-full rounded-full bg-[#FFE169] text-xl font-semibold text-[#130F40]",
-                "hover:bg-[#C1B35C] active:bg-[#766F44]"
+                "transition duration-300 ease-out hover:bg-[#C1B35C] active:bg-[#766F44]"
                 // loading && "cursor-not-allowed opacity-50",
               )}
               type="submit"
@@ -246,7 +246,7 @@ export default function RegisterForm() {
 
             <Button
               variant="ghost"
-              className="mx-auto block w-fit text-center text-lg text-[#93A3B6] hover:bg-transparent hover:text-[#6D7885] active:bg-transparent active:text-[#434A52]"
+              className="mx-auto block w-fit text-center text-lg text-[#93A3B6] transition duration-300 ease-out hover:bg-transparent hover:text-[#6D7885] active:bg-transparent active:text-[#434A52]"
               asChild
             >
               <Link href="/signin">Click here to Sign In</Link>

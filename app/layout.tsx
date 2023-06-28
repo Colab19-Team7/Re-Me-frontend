@@ -1,6 +1,8 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { TailwindIndicator } from "~components/tailwind-indicator";
 import { Toaster } from "~components/ui/toaster";
+import { siteConfig } from "~config/site";
 import { fontMono, fontSans } from "~lib/fonts";
 import { cn } from "~lib/utils";
 
@@ -10,6 +12,28 @@ import { Providers } from "../components/providers";
 interface RootLayoutProps {
   children: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  openGraph: {
+    type: "website",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [
+      {
+        url: `${siteConfig.url}/main-logo.png`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+};
 
 export default function RootLayout({ children }: RootLayoutProps) {
   // useEffect(() => {

@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Re-Me Privacy Policy",
+};
+
 function Page() {
   return (
     <section className="min-h-screen bg-[#130F40]">

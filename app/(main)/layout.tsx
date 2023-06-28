@@ -61,7 +61,7 @@ export default async function Layout({
   if (!session) redirect("/signin");
 
   return (
-    <section className="relative grid min-h-screen grid-cols-12 gap-6 bg-[#130F40] px-6 py-8 text-[#FEF8FD]">
+    <section className="relative grid grid-cols-12 gap-6 bg-[#130F40] px-6 py-8 text-[#FEF8FD]">
       <div className="sticky col-span-3 h-fit w-[277px] items-start space-y-5 rounded-2xl bg-[#1E1633] py-4">
         <div className="px-6">
           <h1 className="font-mono text-2xl font-bold text-[#FFEC78] lg:text-3xl">

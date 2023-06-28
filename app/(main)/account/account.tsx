@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Icons } from "~components/icons";
@@ -9,13 +11,24 @@ import { cn } from "~lib/utils";
 
 export default function Account({ session }: { session: Session }) {
   const { toast } = useToast();
+  const [loading, isLoading] = useState(false);
 
   async function handleSignOut() {
-    await signOut();
-    toast({
-      title: "Signed out",
-      description: "You have been signed out.",
-    });
+    try {
+      isLoading(true);
+      await signOut();
+      toast({
+        title: "Signed out",
+        description: "You have been signed out.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An error occurred while signing out.",
+      });
+    } finally {
+      isLoading(false);
+    }
   }
 
   return (
@@ -28,7 +41,7 @@ export default function Account({ session }: { session: Session }) {
 
       <div className="flex flex-col gap-6">
         {/* divider */}
-        <div className="h-[3px] w-full bg-[#2A2A2A]" />
+        <div className="h-px w-full bg-[#93A3B6]" />
 
         <div className="flex items-center gap-8">
           {session.user.image ? (
@@ -51,7 +64,7 @@ export default function Account({ session }: { session: Session }) {
           </div>
         </div>
 
-        <div className="mb-6 h-[3px] w-full bg-[#2A2A2A]" />
+        <div className="mb-6 h-px w-full bg-[#93A3B6]" />
       </div>
 
       <Button
@@ -59,12 +72,9 @@ export default function Account({ session }: { session: Session }) {
           "mx-auto block h-12 min-w-[185px] rounded bg-white text-lg font-bold uppercase text-black",
           "hover:bg-[#D4DAE0] active:bg-[#9B9D9F]"
         )}
-        onClick={() =>
-          signOut({
-            callbackUrl: "/signin",
-          })
-        }
+        onClick={() => handleSignOut()}
       >
+        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         Sign out
       </Button>
     </div>
